@@ -4,8 +4,6 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
-    """Application settings loaded from environment and .env file."""
-
     app_name: str = "Tender Status Tracker"
     app_env: str = "development"
     debug: bool = True
@@ -25,5 +23,4 @@ class Settings(BaseSettings):
 
 @lru_cache
 def get_settings() -> Settings:
-    """Return cached settings instance (read from env only once)."""
     return Settings()
