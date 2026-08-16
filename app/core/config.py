@@ -1,5 +1,4 @@
 from functools import lru_cache
-
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
@@ -7,10 +6,8 @@ class Settings(BaseSettings):
     app_name: str = "Tender Status Tracker"
     app_env: str = "development"
     debug: bool = True
-
     app_host: str = "0.0.0.0"
     app_port: int = 8000
-
     database_url: str = "postgresql+asyncpg://tender:tender@localhost:5432/tender"
     redis_url: str = "redis://localhost:6379/0"
 
