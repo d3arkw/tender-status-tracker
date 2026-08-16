@@ -1,14 +1,21 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from app.database.session import get_session
-from app.schemas.tender import TenderCreate, TenderRead, TenderStatusHistoryRead, TenderUpdateStatus
+from app.schemas.tender import (
+    TenderCreate,
+    TenderRead,
+    TenderStatusHistoryRead,
+    TenderUpdateStatus,
+)
 from app.services import tender_service
 
 router = APIRouter(prefix="/tenders", tags=["tenders"])
 
 
 @router.post("", response_model=TenderRead, status_code=201)
-async def create_tender(data: TenderCreate, session: AsyncSession = Depends(get_session)):
+async def create_tender(
+    data: TenderCreate, session: AsyncSession = Depends(get_session)
+):
     return await tender_service.create_tender(session, data)
 
 
@@ -21,7 +28,11 @@ async def get_tender(tender_id: int, session: AsyncSession = Depends(get_session
 
 
 @router.patch("/{tender_id}/status", response_model=TenderRead)
-async def update_status(tender_id: int, data: TenderUpdateStatus, session: AsyncSession = Depends(get_session)):
+async def update_status(
+    tender_id: int,
+    data: TenderUpdateStatus,
+    session: AsyncSession = Depends(get_session),
+):
     try:
         tender = await tender_service.update_status(session, tender_id, data)
     except ValueError as e:

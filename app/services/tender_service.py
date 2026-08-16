@@ -44,7 +44,9 @@ async def get_tender_cached(session: AsyncSession, tender_id: int) -> dict | Non
     return data
 
 
-async def update_status(session: AsyncSession, tender_id: int, data: TenderUpdateStatus) -> Tender | None:
+async def update_status(
+    session: AsyncSession, tender_id: int, data: TenderUpdateStatus
+) -> Tender | None:
     tender = await get_tender(session, tender_id)
     if tender is None:
         return None
@@ -68,7 +70,9 @@ async def update_status(session: AsyncSession, tender_id: int, data: TenderUpdat
     return tender
 
 
-async def get_history(session: AsyncSession, tender_id: int) -> list[TenderStatusHistory]:
+async def get_history(
+    session: AsyncSession, tender_id: int
+) -> list[TenderStatusHistory]:
     result = await session.execute(
         select(TenderStatusHistory)
         .where(TenderStatusHistory.tender_id == tender_id)
