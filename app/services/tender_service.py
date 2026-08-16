@@ -68,9 +68,7 @@ async def update_status(session: AsyncSession, tender_id: int, data: TenderUpdat
     return tender
 
 
-async def get_history(
-    session: AsyncSession, tender_id: int
-) -> list[TenderStatusHistory]:
+async def get_history(session: AsyncSession, tender_id: int) -> list[TenderStatusHistory]:
     result = await session.execute(
         select(TenderStatusHistory)
         .where(TenderStatusHistory.tender_id == tender_id)
