@@ -44,9 +44,7 @@ async def get_tender_cached(session: AsyncSession, tender_id: int) -> dict | Non
     return data
 
 
-async def update_status(
-    session: AsyncSession, tender_id: int, data: TenderUpdateStatus
-) -> Tender | None:
+async def update_status(session: AsyncSession, tender_id: int, data: TenderUpdateStatus) -> Tender | None:
     tender = await get_tender(session, tender_id)
     if tender is None:
         return None
